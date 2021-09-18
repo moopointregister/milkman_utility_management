@@ -1,0 +1,102 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Page User {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+          <style>
+            :root {
+	 --color: rebeccapurple;
+	 --disabled: #959495;
+}
+ *, *:before, *:after {
+	 box-sizing: border-box;
+}
+ .checkbox {
+	 display: grid;
+	 grid-template-columns: min-content auto;
+	 grid-gap: 0.5em;
+	 font-size: 2rem;
+	 color: var(--color);
+}
+ .checkbox--disabled {
+	 color: var(--disabled);
+}
+ .checkbox__control {
+	 display: inline-grid;
+	 width: 1em;
+	 height: 1em;
+	 border-radius: 0.25em;
+	 border: 0.1em solid currentColor;
+}
+ .checkbox__control svg {
+	 transition: transform 0.1s ease-in 25ms;
+	 transform: scale(0);
+	 transform-origin: bottom left;
+}
+ .checkbox__input {
+	 display: grid;
+	 grid-template-areas: "checkbox";
+}
+ .checkbox__input > * {
+	 grid-area: checkbox;
+}
+ .checkbox__input input {
+	 opacity: 0;
+	 width: 1em;
+	 height: 1em;
+}
+ .checkbox__input input:focus + .checkbox__control {
+	 box-shadow: 0 0 0 0.05em #fff, 0 0 0.15em 0.1em currentColor;
+}
+ .checkbox__input input:checked + .checkbox__control svg {
+	 transform: scale(1);
+}
+ .checkbox__input input:disabled + .checkbox__control {
+	 color: var(--disabled);
+}
+ 
+          </style>
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title">New Customer</h4>
+                  <p class="card-category"></p>
+                </div>
+                <div class="card-body">
+                  <form method="POST">
+                      {% csrf_token %}
+                      
+                      
+                    <div class="row">
+                      <div class="col-md-5 m-3">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Name</label>
+                          {{ form.name }}
+                        </div>
+                      </div>
+                      <div class="col-md-5 m-3">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Rates</label>
+                          {{ form.rates }}
+                        </div>
+                      </div>
+                      
+                    </div>
+                    <div class="clearfix"></div>
+                    <button type="submit" class="btn btn-primary pull-left m-4">Create customer</button>
+                    <div class="clearfix"></div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

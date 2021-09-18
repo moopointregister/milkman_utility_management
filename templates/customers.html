@@ -1,0 +1,57 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Customers{% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header card-header-primary">
+          <h4 class="card-title ">Customers</h4>
+          <p class="card-category"></p>
+          <a href="{% url 'newcustomer' %}" class="btn btn-secondary pull-right">Add new customer</a>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class=" text-primary">
+                <th>
+                  Name
+                </th>
+                <th>
+                  Pending
+                </th>
+                               
+                
+              </thead>
+              <tbody>
+               
+               {% for customer in customers %}
+                <tr>
+                  <td>
+                    <a href="{% url 'profile' customer.pk %}">{{customer.name}}</a>
+                  </td>
+                  <td class="text-primary">
+                    {{ customer.unpaid_amount }}
+                  </td>
+                  
+                </tr>
+                {% endfor %}
+
+              
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

@@ -1,0 +1,282 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} {{cust.name}} profile {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+
+
+<div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header card-header-primary">
+          <h4 class="card-title ">{{cust.name}}</h4>
+          <p class="card-category">Customer since {{cust.start_date}}</p>
+          <a href="{% url 'customerss' %}" class="btn btn-secondary pull-right">Back</a>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class=" text-primary">
+                <th>
+                  Total Quantity
+                </th>
+                <th>
+                  Total Value
+                </th>
+                <th>
+                  Total Paid amount
+                </th>
+                
+                <th>
+                  Pending amount
+                </th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    {{ obj.total_quantity }} Kg
+                  </td>
+                  <td>
+                    Rs {{ obj.total_value }}
+                  </td>
+                  <td>
+                    Rs {{ obj.total_paid_amount }}
+                  </td>
+                  <td class="text-primary">
+                    Rs {{ obj.unpaid_amount }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div id="accordion">
+        <div class="card-title col-md-12">
+          <div class="card">
+            <div id="headingOne">
+            
+              <a href="#collapseOne" data-toggle="collapse"  aria-expanded="true" role='button' aria-controls="collapseOne">
+                <div class="card">
+                  <div class="card-header card-header-primary">
+                    <h4 class="card-title ">Milk transactions</h4>
+                    <p class="card-category">Showing all Milk Transactions</p>
+                    <div class="row">
+                      <div id="accordionTwo">
+                        <div class="card-title col-md-12">
+                          <div id="headingTwo">
+                            
+                              <button class="btn btn-secondary" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                Filter by date
+                              </button>
+                            
+                          </div>
+                        
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionTwo">
+                          <div class="form">
+                            <form action="#" method="GET">
+                              <!-- <label for="quantity">Quantity</label>
+                              <input type="number" id = 'quantity' name='quantity'> -->
+                              <div class='form-group '>
+                                <span class="input-group-addon">From</span>
+                                <input type="date" class="input-sm form-control" name="start_milk" required/>
+                                <span class="input-group-addon">to</span>
+                                <input type="date" class="input-sm form-control" name="end_milk" required/>
+                                
+                              </div>
+                              <button type="submit" class='btn'>submit</button>
+                              
+                            </form>
+                          </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div>
+                      
+                          
+                      </div>
+                      
+                    </div>
+        
+                  </div>
+                </div>
+              </a>
+            
+          </div>
+        
+        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-body">
+                {% if start is not None %}
+                <p class="text-primary">YYYY-MM-DD</p>
+                <p class="text-secondary">
+                  {{start}} to {{end}}
+                </p>
+                {% endif %}
+                
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead class=" text-primary">
+                      <th>
+                        Time
+                      </th>
+                      <th>
+                        Customer
+                      </th>
+                      <th>
+                        Quantity
+                      </th>
+                      <th>
+                        Rates
+                      </th>
+                      <th>
+                        Value
+                      </th>
+                    </thead>
+                    <tbody>
+                      {% for mt in milktrans %}
+                      <tr>
+                        <td>
+                          {{mt.transaction_time}}
+                        </td>
+                        <td>
+                          {{mt.customer}}
+                        </td>
+                        <td>
+                          {{mt.quantity}} KG
+                        </td>
+                        <td>
+                          Rs. {{mt.rates}}/KG
+                        </td>
+                        <td class="text-primary">
+                          Rs. {{mt.value}}
+                        </td>
+                      </tr>
+                    
+                    
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      <div id="accordionThree">
+        <div class="card-title col-md-12">
+          <div class="card">
+            <div id="headingThree">
+            
+              <a href="#collapseThree" data-toggle="collapse"  aria-expanded="true" role='button' aria-controls="collapseThree">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title ">Payments</h4>
+                  <p class="card-category">Showing all Payments</p>
+                  <div class="row">
+                    <div id="accordionFour">
+                      <div class="card-title col-md-12">
+                        <div id="headingFour">
+                          
+                            <button class="btn btn-secondary" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                              Filter by date
+                            </button>
+                          
+                        </div>
+                      
+                      <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionFour">
+                        <div class="form">
+                          <form action="#" method="GET">
+                            <!-- <label for="quantity">Quantity</label>
+                            <input type="number" id = 'quantity' name='quantity'> -->
+                            <div class='form-group '>
+                              <span class="input-group-addon">From</span>
+                              <input type="date" class="input-sm form-control" name="start_pay" required/>
+                              <span class="input-group-addon">to</span>
+                              <input type="date" class="input-sm form-control" name="end_pay" required/>
+                              
+                            </div>
+                            <button type="submit" class='btn'>submit</button>
+                            
+                          </form>
+                        </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                    
+                        
+                    </div>
+                    
+                  </div>
+      
+                </div>
+              </a>
+            
+          </div>
+        
+        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionThree">
+          <div class="col-md-12">
+            <div class="card">
+              
+              <div class="card-body">
+                {% if start is not None %}
+                <p class="text-primary">YYYY-MM-DD</p>
+                <p class="text-secondary">
+                  {{start}} to {{end}}
+                </p>
+                {% endif %}
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead class=" text-primary">
+                      <th>
+                        Customers
+                      </th>
+                      <th>
+                        Time
+                      </th>
+                      <th>
+                        Amount
+                      </th>
+                    </thead>
+                    <tbody>
+                      {% for p in pays %}
+                      <tr>
+                        <td>
+                          {{p.customer}}
+                        </td>
+                        <td>
+                          {{p.payment_time}}
+                        </td>
+                        <td class="text-primary">
+                          {{p.payment_amount}}
+                        </td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      
+      
+    </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

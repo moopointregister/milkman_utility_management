@@ -1,0 +1,99 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Transactions {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header card-header-primary">
+          <h4 class="card-title ">All Payments</h4>
+          <p class="card-category">Showing all Milk Transactions</p>
+          <div class="row">
+            <div id="accordion">
+              <div class="card-title col-md-12">
+                <div id="headingOne">
+                  
+                    <button class="btn btn-secondary" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                      Filter by date
+                    </button>
+                  
+                </div>
+              
+              <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="form">
+                  <form action="#" method="GET">
+                    <!-- <label for="quantity">Quantity</label>
+                    <input type="number" id = 'quantity' name='quantity'> -->
+                    <div class='form-group '>
+                      <span class="input-group-addon">From</span>
+                      <input type="date" class="input-sm form-control" name="start" required/>
+                      <span class="input-group-addon">to</span>
+                      <input type="date" class="input-sm form-control" name="end" required/>
+                      
+                    </div>
+                    <button type="submit" class='btn'>submit</button>
+                    
+                  </form>
+                </div>
+                </div>
+              </div>
+            </div>
+            <div>
+            
+              <a href="{% url 'transactions' %}" class="btn btn-secondary pull-right">Back</a>  
+            </div>
+            
+          </div>
+
+        </div>
+        <div class="card-body">
+          {% if start is not None %}
+          <p class="text-primary">YYYY-MM-DD</p>
+          <p class="text-secondary">
+            {{start}} to {{end}}
+          </p>
+          {% endif %}
+          <div class="table-responsive">
+            <table class="table">
+              <thead class=" text-primary">
+                <th>
+                  Customers
+                </th>
+                <th>
+                  Time
+                </th>
+                <th>
+                  Amount
+                </th>
+              </thead>
+              <tbody>
+                {% for p in pays %}
+                <tr>
+                  <td>
+                    {{p.customer}}
+                  </td>
+                  <td>
+                    {{p.payment_time}}
+                  </td>
+                  <td class="text-primary">
+                    {{p.payment_amount}}
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

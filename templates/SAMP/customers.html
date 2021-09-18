@@ -1,0 +1,71 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Page User {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header card-header-primary">
+          <h4 class="card-title ">Customers</h4>
+          <p class="card-category"></p>
+          <a href="/createcustomer" class="btn btn-secondary pull-right">Add new customer</a>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class=" text-primary">
+                <th>
+                  Name
+                </th>
+                <th>
+                  Pending
+                </th>
+                <th>
+                </th>
+                <th>
+                </th>                
+                
+              </thead>
+              <tbody>
+               
+                {% for customer in customers %}
+                <tr>
+                  <td>
+                    <a href='#'>{{customer.name}}</a>
+                  </td>
+                  <td class="text-primary">
+                    {{ customer.unpaid_amount }}
+                  </td>
+                  <td class="text-primary">
+                    <form action="{{ customer.name }}/addpayment" method="POST">
+                      {% csrf_token %}
+                      <div class="form-group row">
+                        <!-- <td><input type="number" class='form-control' name='add_payment'></td> -->
+                        <td>{{ pay.amount }}</td>
+                        <td><button type="submit" class="btn btn-primary pull-right">Add Payment</button></td>
+                        <!-- <td><a href="{{ customer.id }}/deletecustomer" class="btn btn-primary pull-right">Delete</a></td> -->
+                      </div>
+                    </form>
+                  </td>
+                  
+                </tr>
+                {% endfor %}
+
+              
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

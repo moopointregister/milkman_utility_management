@@ -1,0 +1,250 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Transactions {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+
+<div class="row">
+  <div class="col-md-12">
+    <div id="accordion">
+      <div class="card-title col-md-12">
+        <div class="card">
+          <div id="headingOne">
+          
+            <a href="#collapseOne" data-toggle="collapse"  aria-expanded="true" role='button' aria-controls="collapseOne">
+             <div class="card">
+              <div class="card-header card-header-primary">
+                <h4 class="card-title ">Payment transactions</h4>
+                <p class="card-category">Showing transactions in last 30 hours</p>
+                <a href="{% url 'allpayments' %}" class="btn btn-secondary">Show all Payments</a>
+              </div>
+             </div>
+            </a>
+          
+        </div>
+      
+      <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead class=" text-primary">
+                    <th>
+                      Customers
+                    </th>
+                    <th>
+                      Time
+                    </th>
+                    <th>
+                      Amount
+                    </th>
+                  </thead>
+                  <tbody>
+                    {% for p in pay %}
+                    <tr>
+                      <td>
+                        {{p.customer}}
+                      </td>
+                      <td>
+                        {{p.payment_time}}
+                      </td>
+                      <td class="text-primary">
+                        {{p.payment_amount}}
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div id="accordionThree">
+      <div class="card-title col-md-12">
+        <div class="card">
+          <div id="headingThree">
+          
+            <a href="#collapseThree"  data-toggle="collapse"  aria-expanded="true" role='button' aria-controls="collapseThree">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title ">Milk transactions</h4>
+                  <p class="card-category">Showing transactions in last 30 hours </p>
+                  <a href="{% url 'allmilktrans' %}" class="btn btn-secondary">Show all transactions</a>
+                </div>
+              </div>
+            </a>
+          
+        </div>
+      
+      <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionThree">
+        <div class="col-md-12">
+          <div class="card">
+            
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead class=" text-primary">
+                    <th>
+                      Time
+                    </th>
+                    <th>
+                      Customer
+                    </th>
+                    <th>
+                      Quantity
+                    </th>
+                    <th>
+                      Rates
+                    </th>
+                    <th>
+                      Value
+                    </th>
+                  </thead>
+                  <tbody>
+                    {% for mt in milktrans %}
+                    <tr>
+                      <td>
+                        {{mt.transaction_time}}
+                      </td>
+                      <td>
+                        {{mt.customer}}
+                      </td>
+                      <td>
+                        {{mt.quantity}} KG
+                      </td>
+                      <td>
+                        Rs. {{mt.rates}}/KG
+                      </td>
+                      <td class="text-primary">
+                        Rs. {{mt.value}}
+                      </td>
+                    </tr>
+                  
+                  
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header card-header-primary">
+          <h4 class="card-title ">Payment transactions</h4>
+          <p class="card-category">Showing transactions in last 30 hours</p>
+          <a href="{% url 'allpayments' %}" class="btn btn-secondary pull-right">Show all Payments</a>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class=" text-primary">
+                <th>
+                  Customers
+                </th>
+                <th>
+                  Time
+                </th>
+                <th>
+                  Amount
+                </th>
+              </thead>
+              <tbody>
+                {% for p in pay %}
+                <tr>
+                  <td>
+                    {{p.customer}}
+                  </td>
+                  <td>
+                    {{p.payment_time}}
+                  </td>
+                  <td class="text-primary">
+                    {{p.payment_amount}}
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title ">Milk transactions</h4>
+            <p class="card-category">Showing transactions in last 30 hours </p>
+            <a href="{% url 'allmilktrans' %}" class="btn btn-secondary pull-right">Show all Milk transactions</a>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class=" text-primary">
+                  <th>
+                    Time
+                  </th>
+                  <th>
+                    Customer
+                  </th>
+                  <th>
+                    Quantity
+                  </th>
+                  <th>
+                    Rates
+                  </th>
+                  <th>
+                    Value
+                  </th>
+                </thead>
+                <tbody>
+                  {% for mt in milktrans %}
+                  <tr>
+                    <td>
+                      {{mt.transaction_time}}
+                    </td>
+                    <td>
+                      {{mt.customer}}
+                    </td>
+                    <td>
+                      {{mt.quantity}} KG
+                    </td>
+                    <td>
+                      Rs. {{mt.rates}}/KG
+                    </td>
+                    <td class="text-primary">
+                      Rs. {{mt.value}}
+                    </td>
+                  </tr>
+                
+                
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+</div> -->
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

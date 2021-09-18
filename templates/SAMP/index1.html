@@ -1,0 +1,132 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Page User {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+          <style>
+            :root {
+	 --color: rebeccapurple;
+	 --disabled: #959495;
+}
+ *, *:before, *:after {
+	 box-sizing: border-box;
+}
+ .checkbox {
+	 display: grid;
+	 grid-template-columns: min-content auto;
+	 grid-gap: 0.5em;
+	 font-size: 2rem;
+	 color: var(--color);
+}
+ .checkbox--disabled {
+	 color: var(--disabled);
+}
+ .checkbox__control {
+	 display: inline-grid;
+	 width: 1em;
+	 height: 1em;
+	 border-radius: 0.25em;
+	 border: 0.1em solid currentColor;
+}
+ .checkbox__control svg {
+	 transition: transform 0.1s ease-in 25ms;
+	 transform: scale(0);
+	 transform-origin: bottom left;
+}
+ .checkbox__input {
+	 display: grid;
+	 grid-template-areas: "checkbox";
+}
+ .checkbox__input > * {
+	 grid-area: checkbox;
+}
+ .checkbox__input input {
+	 opacity: 0;
+	 width: 1em;
+	 height: 1em;
+}
+ .checkbox__input input:focus + .checkbox__control {
+	 box-shadow: 0 0 0 0.05em #fff, 0 0 0.15em 0.1em currentColor;
+}
+ .checkbox__input input:checked + .checkbox__control svg {
+	 transform: scale(1);
+}
+ .checkbox__input input:disabled + .checkbox__control {
+	 color: var(--disabled);
+}
+ 
+          </style>
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title">Add Milk Transaction</h4>
+                  <p class="card-category"></p>
+                </div>
+                <div class="card-body">
+                  <form>
+                    <div class="row">
+                      <!-- <div class="col-md-5">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">UserID (disabled)</label>
+                          <input type="options" class="form-control" disabled value="{{ request.user.id }}">
+                        </div>
+                      </div> -->
+                      <div class="col-md-8">
+                        <div class="form-group">
+                          
+                            <label for="customer" class="bmd-label-floating ">Customer:</label>
+                            
+                            <select id="customer" name="cars" class='form-control'>
+                              <option value="volvo" class='dropdown-item'>Volvo XC90</option>
+                            </select>
+                            
+                        </div>
+                      </div>
+                      
+                    </div>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Rates</label>
+                          <input type="number" class="form-control" disabled>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Quantity</label>
+                          <input type="text" class="form-control">
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="checkbox bmd-label-floating">
+                            <span class="checkbox__input">
+                              <input type="checkbox" name="checkbox">
+                              <span class="checkbox__control">
+                                <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
+                                  <path fill='none' stroke='currentColor' stroke-width='1.5' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg>
+                              </span>
+                            </span>
+                            <span class="radio__label">Paid</span>
+                          </label>
+                        </div>
+                      </div>
+                      
+                    </div>
+                    <button type="submit" class="btn btn-primary pull-right">Milk Given</button>
+                    <div class="clearfix"></div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

@@ -1,0 +1,174 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Home{% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+          <style>
+            :root {
+	 --color: rebeccapurple;
+	 --disabled: #959495;
+}
+ *, *:before, *:after {
+	 box-sizing: border-box;
+}
+ .checkbox {
+	 display: grid;
+	 grid-template-columns: min-content auto;
+	 grid-gap: 0.5em;
+	 font-size: 2rem;
+	 color: var(--color);
+}
+ .checkbox--disabled {
+	 color: var(--disabled);
+}
+ .checkbox__control {
+	 display: inline-grid;
+	 width: 1em;
+	 height: 1em;
+	 border-radius: 0.25em;
+	 border: 0.1em solid currentColor;
+}
+ .checkbox__control svg {
+	 transition: transform 0.1s ease-in 25ms;
+	 transform: scale(0);
+	 transform-origin: bottom left;
+}
+ .checkbox__input {
+	 display: grid;
+	 grid-template-areas: "checkbox";
+}
+ .checkbox__input > * {
+	 grid-area: checkbox;
+}
+ .checkbox__input input {
+	 opacity: 0;
+	 width: 1em;
+	 height: 1em;
+}
+ .checkbox__input input:focus + .checkbox__control {
+	 box-shadow: 0 0 0 0.05em #fff, 0 0 0.15em 0.1em currentColor;
+}
+ .checkbox__input input:checked + .checkbox__control svg {
+	 transform: scale(1);
+}
+ .checkbox__input input:disabled + .checkbox__control {
+	 color: var(--disabled);
+}
+ 
+          </style>
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title">Add Milk Transaction</h4>
+                  <p class="card-category"></p>
+                  <a href="{% url 'topayments' %}" class='btn btn-secondary pull-right'>Payment Section</a>
+                </div>
+                <div class="card-body">
+                  <form action="{% url 'home' %} " method='POST'>
+                    {% csrf_token %}
+                    <div class="row">
+                      <div class="col-md-12">
+                        
+                        
+                        <div class="form-group">
+                          
+                            <label for="customer1" class="bmd-label-floating ">Customer:</label>
+                            <select id="customer1" name="customer1" class='form-control'>
+                              <option value="blank" class=><p class="dropdown-item">Select a customer</p></option>
+                              {% for c in cust %}
+                              <option value="{{c.name}}" class=><p class="dropdown-item">{{c.name}}</p></option>
+                              {% endfor %}
+                            </select>                            
+                        </div>
+                      </div>
+                      
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Rates</label>
+                          {{ form.rates }}
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Quantity</label>
+                          {{form.quantity}}
+                        </div>
+                      </div>
+                      
+                    </div>
+                    <div class="col-md-12">
+                      <div class="row">
+                      <div class="col-md-8">
+                        
+                          <div class="form-group">
+                            <label class="checkbox ">
+                              <span class="radio__label">Paid</span>
+                              <span class="checkbox__input">
+                                {{form.paid}}
+                                <span class="checkbox__control">
+                                  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
+                                    <path fill='none' stroke='currentColor' stroke-width='1.5' d='M1.73 12.91l6.37 6.37L22.79 4.59' /></svg>
+                                    
+                                </span>
+                                
+                              </span>
+                              
+                            </label>
+                            
+                          </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add Milk transaction</button>
+                      </div>
+                      
+                      
+                    </div>
+                    <div class="clearfix"></div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="col-md-12">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title">Add Payment</h4>
+                  <p class="card-category"></p>
+                </div>
+                <div class="card-body">
+                  <form action="{% url 'transactions' %} " method='POST'>
+                    {% csrf_token %}
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="customer" class="bmd-label-floating ">Customer:</label>                            
+                            {{ payform.customer }}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-8">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Payment amount</label>
+                          {{ payform.payment_amount }}
+                        </div>
+                      </div>
+                      <button type="submit" class="btn btn-primary pull-right">Add Payment</button>
+                    </div>
+                    <div class="clearfix"></div>
+                  </form>
+                </div>
+              </div>
+            </div> -->
+          </div>
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

@@ -1,0 +1,42 @@
+    <div class="sidebar" data-color="purple" data-background-color="white" data-image="/static/assets/img/sidebar-1.jpg">
+      <div class="logo">
+        <a target="_blank" rel="noopener noreferrer" 
+           target="_blank" rel="noopener noreferrer" 
+           href="#" class="simple-text logo-normal">
+          <img src="/static/cow-face-front.jpg" alt="logo">
+        </a>
+      </div>
+      {% if user.is_authenticated %}
+      <div class="sidebar-wrapper">
+        <ul class="nav">
+          <li class="nav-item {% if 'home' == segment %} active {% endif %}">
+            <a class="nav-link" href="{% url 'home' %}">
+              <i class="material-icons">dashboard</i>
+              <p>Home</p>
+            </a>
+          </li>
+          <li class="nav-item {% if 'customers' == segment %} active {% endif %}">
+            <a class="nav-link" href="{% url 'customerss' %}">
+              <i class="material-icons">person</i>
+              <p>Customers</p>
+            </a>
+          </li>
+          <li class="nav-item {% if 'transactions' == segment %} active {% endif %}">
+            <a class="nav-link" href="{% url 'transactions' %}">
+              <i class="material-icons">content_paste</i>
+              <p>Transactions</p>
+            </a>
+          </li>
+
+          <li class="nav-item ">
+            
+          </li>
+
+          <li class="nav-item active-pro ">
+            
+          </li>
+        </ul>
+      </div>
+      {% endif %}
+
+    </div>
